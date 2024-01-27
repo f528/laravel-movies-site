@@ -21,6 +21,6 @@ class master extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.master');
+        return view('layout.master');
     }
 }

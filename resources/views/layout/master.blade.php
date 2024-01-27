@@ -7,7 +7,7 @@
      @vite(['resources/css/app.css', 'resources/js/app.js'])
     <title>Document</title>
   </head>
-  <body>
+  <body class="font-sons bg-gray-900 text-white">
     <x-navbar/>
     {{ $slot }}
 
