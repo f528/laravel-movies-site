@@ -37,7 +37,7 @@ class HomeController extends Controller
     {
 
         $showMovies = Http::withToken(config('services.tmdb.token'))
-        ->get('https://api.themoviedb.org/3/movie/'.$id)
+        ->get('https://api.themoviedb.org/3/movie/'.$id.'?append_to_response=credits,videos,images')
         ->json();
 
         $genresArray = Http::withToken(config('services.tmdb.token'))
@@ -47,7 +47,7 @@ class HomeController extends Controller
         $genres = collect($genresArray)->mapWithKeys(function ($genre) {
             return [$genre['id'] => $genre['name']];
         });
-         dump($showMovies);
+
         return view('movies.show',['showMovies'=>$showMovies,
                                    'genres'=>$genres
     ]);
