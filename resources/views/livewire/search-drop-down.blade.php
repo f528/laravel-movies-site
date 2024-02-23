@@ -1,11 +1,25 @@
  <div class="flex  justify-end">
-     <div class="relative x-data="{ isOpen: true }" @click.away=false>
-         <input type="text" wire:model.live.debounce.500ms="search"
+     <div class="relative" x-data="{ isOpen: true }" @click.away=false>
+         <input
+          wire:model.live.debounce.500ms="search"
+         type="text"
+
              class="bg-gray-600 rounded-full w-75 px-4 py-1 ml-4 focus:outline-none focus:shadow-outline"
-             placeholder="Search" @focus="isOpen=true" @keydown.escape.window="isOpen = false"
+             placeholder="Search"
+            x-ref="search"
+              @keydown.escape.window="isOpen = false"
              @keydown.shift.tab="isOpen = false"
+             @focus="isOpen = true"
              @keydown="isOpen = true"
-             />
+
+             @keydown.shift.tab="isOpen = false"
+             @keydown.window="if(event.keyCode ==191){
+                event.preventDefault();
+                 $refs="search.focus();
+             }
+
+            "
+            >
 
      </div>
      <div wire:loading class="spinner top-0 right-0 mr-20 mt-8"></div>

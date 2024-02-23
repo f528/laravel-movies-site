@@ -42,10 +42,9 @@
                         @if (count($showMovies['videos']['results'][0]))
                             <div class="mt-12">
                                 <button
-                                @click="isOpen = true"
+                                @click = "isOpen = true"
                                     href="https://www.youtube.com/watch?v={{ $showMovies['videos']['results'][0]['key'] }}"
-                                    class="flex items-center bg-orange-500 text-gray-900 rounded font-semibold px-10 py-4 hover:bg-orange-600 trasition ease-in-out duration-150">>
-
+                                    class="flex items-center bg-orange-500 text-gray-900 rounded font-semibold px-10 py-4 hover:bg-orange-600 trasition ease-in-out duration-150">
                                     <svg id="Layer_1" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
                                         <path
                                             d="m45.203 30.664-23.05-11.771c-.465-.237-1.021-.216-1.465.057-.445.272-.717.757-.717 1.279v23.541c0 .522.271 1.007.717 1.279.24.146.511.221.783.221.233 0 .467-.055.682-.164l23.05-11.771c.502-.256.817-.772.817-1.336s-.315-1.079-.817-1.335zm-22.232 10.656v-18.64l18.252 9.32z" />
@@ -65,11 +64,8 @@
                             <div class="container mx-auto lg:px-32 rounded-lg overflow-y-auto">
                                 <div class="bg-gray-900 rounded">
                                     <div class="flex justify-end pr-4 pt-2">
-                                        <button @click="isOpen= false" class="text-3xl leading-none hover:text-gray-300">&times;
-
+                                        <button @click="isOpen = false" class="text-3xl leading-none hover:text-gray-300">&times;
                                         </button>
-
-
                                     </div>
                                     <div class="modal-body px-8 py-8">
                                         <div class="responsive-container overflow-hidden relative"
@@ -79,17 +75,11 @@
                                                 src="https://www.youtube.com/embed/{{ $showMovies['videos']['results'][0]['key'] }}" frameborder="0" allow="autoplay; encrypted-media"
                                                 allowfullscreen>
                                             </iframe>
-
                                         </div>
-
                                     </div>
-
                                 </div>
-
                             </div>
-
                         </div>
-
                     </div>
 
 
@@ -134,12 +124,15 @@
                     @endif
                 @endforeach
 
+
+
                 {{-- end-movie --}}
 
 
                 {{-- movie --}}
 
             </div>
+
 
         </div>
 
@@ -155,7 +148,7 @@
 
 
         {{-- Screenshot-movie --}}
-        <div class="movie-cast border-t border-gray-800">
+        <div class="movie-cast border-t border-gray-800" x-data="{isOpen :false,image:''}">
             <div class="container mx-auto px-16 py-16">
                 <h2 class="text-4xl font-semibold">Images
                 </h2>
@@ -164,7 +157,12 @@
                     @foreach ($showMovies['images']['backdrops'] as $image)
                         @if ($loop->index < 9)
                             <div class="mt-8">
-                                <a href="">
+                                <a
+                                  @click.prevent="
+                                  isOpen = true
+                                 image='{{ 'https://image.tmdb.org/t/p/original/' . $image['file_path'] }}'
+                                  "
+                                href="">
                                     <img src="{{ 'https://image.tmdb.org/t/p/w300' . $image['file_path'] }}"
                                         alt="">
                                 </a>
@@ -174,5 +172,24 @@
 
 
                 </div>
+                <div style="background-color: rgba(0,0,0,0.5)"
+                            class="fixed top-0 left-0 w-full h-full flex item-center shadow-lg overflow-y-auto"
+                        
+                            <div class="container mx-auto lg:px-32 rounded-lg overflow-y-auto"  x-show="isOpen">
+
+                                <div class="bg-gray-900 rounded">
+                                    <div class="flex justify-end pr-4 pt-2">
+                                        <button
+                                        @click="isOpen = false"
+                                        @keydown.escape.window="isOpen = false"
+                                          class="text-3xl leading-none hover:text-gray-300">&times;
+                                        </button>
+                                    </div>
+                                    <div class="modal-body px-8 py-8">
+                                        <img :src="image" alt="poster">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
             </div>
 </x-master>
