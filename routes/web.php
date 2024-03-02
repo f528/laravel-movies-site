@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ActorsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +16,8 @@ use App\Http\Controllers\HomeController;
 */
 Route::get('/',[HomeController::class,'index'])->name('movies.index');
 Route::get('/movies/{movie}', [HomeController::class, 'show'])->name('movies.show');
+
+
+Route::get('/actors', [ActorsController::class, 'index'])->name('actors.index');
+Route::get('/movies/{actor}', [ActorsController::class, 'show'])->name('actors.show');
 
