@@ -12,13 +12,14 @@ class ActorsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($page= 1)
     {
+        abort_if($page>500,204);
         $popularactors = Http::withToken(config('services.tmdb.token'))
-            ->get('https://api.themoviedb.org/3/person/popular')
+            ->get('https://api.themoviedb.org/3/person/popular?page'.$page)
             ->json()['results'];
-        $viewModel = new ActorsViewModel($popularactors);
-    
+        $viewModel = new ActorsViewModel($popularactors, $page);
+
         return view('actors.index', $viewModel);
     }
 

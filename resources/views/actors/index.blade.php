@@ -1,12 +1,11 @@
 <x-master>
-{{-- Image-Actors-section --}}
-<div class="movie-cast border-b border-gray-800">
-    <div class="container mx-auto px-4 py-16">
-        <h2 class="text-4xl font-semibold text-orange-500">Popular Actors</h2>
+    {{-- Image-Actors-section --}}
+    <div class="movie-cast border-b border-gray-800">
+        <div class="container mx-auto px-4 py-16">
+            <h2 class="text-4xl font-semibold text-orange-500">Popular Actors</h2>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 ">
-            @foreach ( $popolaractors as $actor )
-
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 ">
+                @foreach ($popolaractors as $actor)
                     {{-- movie --}}
                     <div class="mt-8">
                         <a href="#">
@@ -26,27 +25,59 @@
                             </div>
                         </div>
                     </div>
-
-        @endforeach
-
-
-
-        {{-- end-movie --}}
-
-
-        {{-- movie --}}
-
-    </div>
-
-
-</div>
+                @endforeach
 
 
 
 
+            </div>
+
+            <div>
+                <div class="page-load-status my-8">
+                    <div class="flex justify-center">
+                        <div class="infinite-scroll-request spinner my-8 text-4xl">£nbsp;</div>
+                    </div>
+
+                    <p class="infinite-scroll-last">End of content</p>
+                    <p class="infinite-scroll-error">Error</p>
+                </div>
+                {{-- @if ($previous)
+                    <a href=" /actors/page/{{ $previous }}">Previous</a>
+                @else
+                    <div></div>
+                @endif
+
+                @if ($next)
+                    <a href="/actors/page/{{ $next }}">Next</a>
+                @else
+                    <div></div>
+                @endif --}}
+
+
+            </div>
+        </div>
+
+        @section('scripts')
+            <script src="https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.min.js"></script>
+
+            <script>
+                let elem = document.querySelector('.grid');
+                let infScroll = new InfiniteScroll(elem, {
+                    // options
+                    path: '/actors/page/@{{ # }}',
+                    append: '.actor',
+                    status: '.page-load-status',
+
+                });
+            </script>
+        @endsection
 
 
 
+
+
+
+        {{--
     <div class=" container  mx-auto px-4 pt-16">
         <div class="popular-movies">
             <h2 class="uppercase tracking-wider text-orange-500 text-lg font-semibold">
@@ -61,9 +92,7 @@
     </div>
     </div>
     {{-- NOW-PLAYING --}}
-    <div class="container mx-auto px-4 pt-16">
 
-    </div>
 
 
 </x-master>

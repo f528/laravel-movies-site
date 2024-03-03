@@ -9,10 +9,12 @@ use Spatie\ViewModels\ViewModel;
 class ActorsViewModel extends ViewModel
 {
     public $popolaractors;
+    public $page;
 
-    public function __construct($popolaractors)
+    public function __construct($popolaractors,$page)
     {
         $this->popolaractors = $popolaractors;
+        $this->page = $page;
         //
     }
 
@@ -34,5 +36,13 @@ class ActorsViewModel extends ViewModel
                 'profile_path', 'id', 'name', 'known_for',
             ]);
         });
+    }
+
+    public function previous(){
+        return $this->page > 1 ? $this->page - 1 :null;
+    }
+    public function next()
+    {
+        return $this->page < 500 ? $this->page + 1 : null;
     }
 }
