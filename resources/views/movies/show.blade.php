@@ -95,7 +95,6 @@
 </div>
 
 
-s
 
 
 
@@ -122,16 +121,6 @@ s
                                   isOpen = true
                                  image='{{ 'https://image.tmdb.org/t/p/original/' . $image['file_path'] }}'
                                   "
-                            href="">
-                            <img src="{{ 'https://image.tmdb.org/t/p/w300' . $image['file_path'] }}"
-                                alt="">
-                        </a>
-                    </div>
-
-        @endforeach
-
-
-    </div>
     <div style="background-color: rgba(0,0,0,0.5)"
         class="fixed top-0 left-0 w-full h-full flex item-center shadow-lg overflow-y-auto" <div
         class="container mx-auto lg:px-32 rounded-lg overflow-y-auto" x-show="isOpen">

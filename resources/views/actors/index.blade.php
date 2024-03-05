@@ -8,7 +8,7 @@
                 @foreach ($popolaractors as $actor)
                     {{-- movie --}}
                     <div class="mt-8">
-                        <a href="#">
+                        <a href="{{ route('actors.show',$actor['id']) }}">
                             <img src=" {{ $actor['profile_path'] }}"
                                 alt="film"class="hover:opacity-75 transaction ease-in-out duration-150">
                         </a>
@@ -58,18 +58,9 @@
         </div>
 
         @section('scripts')
-            <script src="https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.min.js"></script>
 
-            <script>
-                let elem = document.querySelector('.grid');
-                let infScroll = new InfiniteScroll(elem, {
-                    // options
-                    path: '/actors/page/@{{ # }}',
-                    append: '.actor',
-                    status: '.page-load-status',
 
-                });
-            </script>
+
         @endsection
 
 

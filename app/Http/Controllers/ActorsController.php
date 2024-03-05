@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Spatie\ViewModels\ViewModel;
 use App\ViewModels\ActorsViewModel;
 use Illuminate\Support\Facades\Http;
+use Illuminate\View\ViewName;
 
 class ActorsController extends Controller
 {
@@ -14,7 +15,7 @@ class ActorsController extends Controller
      */
     public function index($page= 1)
     {
-        abort_if($page>500,204);
+        abort_if($page >500,204);
         $popularactors = Http::withToken(config('services.tmdb.token'))
             ->get('https://api.themoviedb.org/3/person/popular?page'.$page)
             ->json()['results'];
@@ -44,7 +45,7 @@ class ActorsController extends Controller
      */
     public function show(string $id)
     {
-        //
+      return view('actors.show');
     }
 
     /**
